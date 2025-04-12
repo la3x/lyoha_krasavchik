@@ -6,7 +6,10 @@ bot = telebot.TeleBot("7686965838:AAGgeyjHnwWddPMQ_5sz9GzTE2Z8XEBYzAI")
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
         bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши что-нибудь!")
-        bot.reply_to(message, "У меня есть такие функции как /coin, /password, /bye, /hello, выбирай любую!")
+
+@bot.message_handler(commands = ['help'])
+def send_help(message):
+    bot.reply_to(message, "У меня есть такие функции как /coin, /password, /bye, /hello, выбирай любую!")
     
 @bot.message_handler(commands=['hello'])
 def send_hello(message):
