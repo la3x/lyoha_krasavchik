@@ -1,0 +1,35 @@
+import telebot
+from bot_logic import gen_password, monetka
+    
+bot = telebot.TeleBot("7686965838:AAGgeyjHnwWddPMQ_5sz9GzTE2Z8XEBYzAI")
+    
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+        bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши что-нибудь!")
+        bot.reply_to(message, "У меня есть такие функции как /coin, /password, /bye, /hello, выбирай любую!")
+    
+@bot.message_handler(commands=['hello'])
+def send_hello(message):
+    bot.reply_to(message, "Привет! Как дела?")
+    
+@bot.message_handler(commands=['bye'])
+def send_bye(message):
+    bot.reply_to(message, "Пока! Удачи!")
+
+@bot.message_handler(commands=['password'])
+def gen_pass(message):
+    password = gen_password(10)
+    bot.reply_to(message, f'Ваш случайно сгенерированный пароль: {password}')
+    
+@bot.message_handler(commands=['coin'])
+def flip(message):
+    res = monetka()
+    bot.reply_to(message, f'Выпало: {res}')   
+    
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    bot.reply_to(message, message.text)
+    
+
+    
+bot.polling()
